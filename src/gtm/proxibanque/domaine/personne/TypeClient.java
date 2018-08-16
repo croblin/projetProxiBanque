@@ -1,9 +1,9 @@
-package gtm.proxibanque.domaine.compte;
+package gtm.proxibanque.domaine.personne;
 
 public enum TypeClient {
 	
-	PARTICULIER("client particulier", 5000),
-	ENTREPRISE("client entreprise", 50000);
+	Particulier("client particulier", 5000),
+	Entreprise("client entreprise", 50000);
 	
 	private String libelleClient;
 	private float debitMaxAutorise;
@@ -19,5 +19,5 @@ public enum TypeClient {
 
 	public float getDebitMaxAutorise() {
 		return debitMaxAutorise;
-	}
+	}	
 }
