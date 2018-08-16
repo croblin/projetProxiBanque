@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"gtm.proxibanque.domaine.structure"}]

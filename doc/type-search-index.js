@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"gtm.proxibanque.domaine.structure","l":"Agence"}]
