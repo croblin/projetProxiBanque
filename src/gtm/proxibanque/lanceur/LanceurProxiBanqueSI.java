@@ -8,6 +8,7 @@ public class LanceurProxiBanqueSI {
 		
 		TypeClient typeClient = TypeClient.PARTICULIER;
 		System.out.println(typeClient.getDebitMaxAutorise());
+		System.out.println(typeClient.getLibelleClient());
 	}
 
 }
