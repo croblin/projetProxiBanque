@@ -12,6 +12,7 @@ import gtm.proxibanque.domaine.personne.Conseiller;
 import gtm.proxibanque.domaine.personne.Gerant;
 import gtm.proxibanque.domaine.personne.TypeClient;
 import gtm.proxibanque.domaine.structure.Agence;
+import gtm.proxibanque.domaine.structure.Bourse;
 
 public class LanceurProxiBanqueSI {
 
@@ -39,6 +40,10 @@ public class LanceurProxiBanqueSI {
 		Conseiller conseillerB4 = new Conseiller(423971456, "Armstrong", "Nell", agenceB, gerantB);
 		Conseiller conseillerB5 = new Conseiller(423971411, "Sànchez", "Alexis", agenceB, gerantB);
 		
+		Bourse bourse1 = new Bourse("25698645", "Bourse de Paris");
+		Bourse bourse2 = new Bourse("78312148", "Bourse de Tokyo");
+		Bourse bourse3 = new Bourse("54328964", "Bourse de New-York");
+		
 		// Affectations des conseillers à l'agence A
 		
 		gerantA.getListeConseillersACharge().add(conseillerA1);
@@ -46,6 +51,8 @@ public class LanceurProxiBanqueSI {
 		gerantA.getListeConseillersACharge().add(conseillerA3);
 		gerantA.getListeConseillersACharge().add(conseillerA4);
 		gerantA.getListeConseillersACharge().add(conseillerA5);
+		
+		// Affectations des conseillers à l'agence B
 		
 		gerantB.getListeConseillersACharge().add(conseillerB1);
 		gerantB.getListeConseillersACharge().add(conseillerB2);
@@ -74,21 +81,28 @@ public class LanceurProxiBanqueSI {
 		conseillerA1.creerClient(client);
 		conseillerA1.creerClient(clientBis);
 		conseillerA1.creerCompteEpargne(client);
-		client.getCompteEpargne().crediter(500f);
+		conseillerA1.afficherClient(client);
+		client.getCompteEpargne().crediter(550001f);
+		conseillerA1.afficherClient(client);
 		
 		gerantA.auditerAgence();
 		
 		clientBis.getCompteCourant().crediter(500f);
 		conseillerA2.creerClient(clientBis);	
 		conseillerA2.creerCompteEpargne(clientBis);
-		conseillerA2.ajouterCarte(clientBis);
+		
+		conseillerA1.gererPatrimoine(bourse1, client, 5000);
+		conseillerA1.gererPatrimoine(bourse1, client, 5000);
+		/*conseillerA2.ajouterCarte(clientBis);
 		System.out.println(conseillerA2.getClient(clientBis).getCompteCourant().getCarteRattachee());
-		System.out.println(conseillerA2.getClient(clientBis).getCompteEpargne().getCarteRattachee());
+		System.out.println(conseillerA2.getClient(clientBis).getCompteEpargne().getCarteRattachee());*/
 		
 		
 		//System.out.println(conseillerA1.getListeClientsACharge());
 		/*conseillerA1.supprimerClient(client);
 		System.out.println(conseillerA1.getListeClientsACharge());*/
+		
+		conseillerA1.effectuerSimulation(client, 960);
 				
 		conseillerA1.effectuerVirement(client, clientBis, 100f);
 		

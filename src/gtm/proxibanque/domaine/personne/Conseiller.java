@@ -8,9 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 import gtm.proxibanque.domaine.compte.Carte;
+import gtm.proxibanque.domaine.compte.Compte;
 import gtm.proxibanque.domaine.compte.CompteEpargne;
 import gtm.proxibanque.domaine.compte.TypeCarte;
 import gtm.proxibanque.domaine.structure.Agence;
+import gtm.proxibanque.domaine.structure.Bourse;
 
 public class Conseiller {
 	
@@ -423,6 +425,80 @@ public class Conseiller {
 			}			
 		}
 		else return false;
+	}
+	
+	// Méthode pour effectuer une simulation de crédit à la consommation ou crédit immobilier
+	public boolean effectuerSimulation(Client client, float credit) {
+		if(this.listeClientsACharge.contains(client)) {
+			String choixCredit;
+			Scanner sc = new Scanner(System.in);
+			float mensualite;
+			int nbMoisRemboursement;
+			do{
+				System.out.println("Voulez-vous effectuer une simulation de crédit à la consommation ou de crédit immobilier ?");
+				System.out.println("Tapez C en majuscule pour le crédit à la consommation, ou I en majuscule pour le crédit immobilier :");
+				choixCredit = sc.nextLine();
+			} while(!choixCredit.equals("C") && !choixCredit.equals("I"));
+			if(choixCredit.equals("C")) {
+				// On calcule la mensualité pour le remboursement du crédit à la consommation
+				mensualite = (Compte.getTauxRemboursementCreditConsommation() / 100) * credit;
+				nbMoisRemboursement = (int) (credit / mensualite);
+				System.out.println("Pour le client " + client.getNom() + " " + client.getPrenom() + ", la simulation du crédit à la consommation est la suivante pour un prêt de " + credit + "€ :");
+				System.out.println("	Pendant " + nbMoisRemboursement + " mois, le client devra rembourser " + mensualite + "€ pour rembourser le prêt.");
+				return true;
+			}
+			else if(choixCredit.equals("I")) {
+				// On calcule la mensualité pour le remboursement du crédit immobilier
+				mensualite = (Compte.getTauxRemboursementCreditImmobilier() / 100) * credit;
+				nbMoisRemboursement = (int) (credit / mensualite);
+				System.out.println("Pour le client " + client.getNom() + " " + client.getPrenom() + ", la simulation du crédit immobilier est la suivante pour un prêt de " + credit + "€ :");
+				System.out.println("	Pendant " + nbMoisRemboursement + " mois, le client devra rembourser " + mensualite + "€ pour rembourser le prêt.");
+				return true;
+			}	
+			else return false;
+		}
+		else {
+			System.out.println("Le client soumis n'est pas rattaché à ce conseiller. Choisissez-en un autre");
+			return false;
+		}		
+	}
+	
+	// Méthode pour effectuer un placement en bourse (il ne peut récupérer son argent, pour l'instant)
+	public boolean gererPatrimoine(Bourse bourse, Client client, float debit) {
+		if(this.listeClientsACharge.contains(client)) {
+			float patrimoine = client.getCompteEpargne().getSolde();
+			if(patrimoine > 500000f) {
+				if(debit < patrimoine) {
+					if(bourse.getListeClientsAvecPatrimoine().containsKey(client)) {
+						float nouveauPatrimoine = Float.parseFloat(bourse.getListeClientsAvecPatrimoine().get(client)) + debit;
+						bourse.getListeClientsAvecPatrimoine().replace(client, bourse.getListeClientsAvecPatrimoine().get(client), Float.toString(nouveauPatrimoine));
+						this.getClient(client).getCompteEpargne().debiter(debit);
+						System.out.println("Le client " + client.getNom() + " " + client.getPrenom() + " a maintenant " + nouveauPatrimoine + "€ de placé sur la " + bourse.getNom() + ".");
+						return true;
+					}
+					else {
+						bourse.getListeClientsAvecPatrimoine().put(client, Float.toString(debit));
+						this.getClient(client).getCompteEpargne().debiter(debit);
+						System.out.println("Le client " + client.getNom() + " " + client.getPrenom() + " a maintenant " + debit + " € de placé sur la " + bourse.getNom() + ".");
+						return true;
+					}
+				}
+				else {
+					System.out.println("Le client " + client.getNom() + " " + client.getPrenom() + " ne peut créditer " + debit + " € sur la " + bourse.getNom() + ".");
+					System.out.println("Il ne peut être à découvert sur son compte épargne.");
+					return false;
+				}
+				
+			}
+			else {
+				System.out.println("Le client " + client.getNom() + " " + client.getPrenom() + " n'est pas considéré comme fortuné. Choisissez-en un autre.");
+				return false;
+			}
+		}
+		else {
+			System.out.println("Le client soumis n'est pas rattaché à ce conseiller. Choisissez-en un autre");
+			return false;
+		}		
 	}
 
 	@Override

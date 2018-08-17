@@ -8,6 +8,8 @@ public class Compte {
 	private float solde;
 	private String dateOuverture;
 	private Carte carteRattachee;
+	private static float tauxRemboursementCreditConsommation = 6f;
+	private static float tauxRemboursementCreditImmobilier = 4f;
 	
 	// Constructeurs
 	
@@ -51,6 +53,22 @@ public class Compte {
 	public void setCarteRattachee(Carte carteRattachee) {
 		this.carteRattachee = carteRattachee;
 	}	
+	
+	public static float getTauxRemboursementCreditConsommation() {
+		return tauxRemboursementCreditConsommation;
+	}
+
+	public static void setTauxRemboursementCreditConsommation(float tauxRemboursementCreditConsommation) {
+		Compte.tauxRemboursementCreditConsommation = tauxRemboursementCreditConsommation;
+	}
+
+	public static float getTauxRemboursementCreditImmobilier() {
+		return tauxRemboursementCreditImmobilier;
+	}
+
+	public static void setTauxRemboursementCreditImmobilier(float tauxRemboursementCreditImmobilier) {
+		Compte.tauxRemboursementCreditImmobilier = tauxRemboursementCreditImmobilier;
+	}
 	
 	// Méthodes métier
 
