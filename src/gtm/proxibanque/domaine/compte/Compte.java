@@ -1,34 +1,30 @@
 package gtm.proxibanque.domaine.compte;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Compte {
 	
 	// Attributs
 	
-	private int numCompte;
+	private String numCompte;
 	private float solde;
 	private String dateOuverture;
-	private List<Carte> listeCartes;
+	private Carte carteRattachee;
 	
 	// Constructeurs
 	
-	public Compte(int numCompte, float solde, String dateOuverture) {
+	public Compte(String numCompte, float solde, String dateOuverture) {
 		super();
 		this.numCompte = numCompte;
 		this.solde = solde;
-		this.dateOuverture = dateOuverture;
-		this.listeCartes = new ArrayList<>();
+		this.dateOuverture = dateOuverture;		
 	}
 	
 	// Accesseurs et mutateurs
 
-	public int getNumCompte() {
+	public String getNumCompte() {
 		return numCompte;
 	}
 
-	public void setNumCompte(int numCompte) {
+	public void setNumCompte(String numCompte) {
 		this.numCompte = numCompte;
 	}
 
@@ -48,26 +44,18 @@ public class Compte {
 		this.dateOuverture = dateOuverture;
 	}
 	
-	public List<Carte> getListeCartes() {
-		return listeCartes;
+	public Carte getCarteRattachee() {
+		return carteRattachee;
 	}
 
-	public void setListeCartes(List<Carte> listeCartes) {
-		this.listeCartes = listeCartes;
-	}
-	
-	public boolean ajouterCarte(Carte carte) {
-		this.listeCartes.add(carte);
-		if(this.listeCartes.contains(carte)) {
-			return true;
-		}
-		else return false;
-	}
+	public void setCarteRattachee(Carte carteRattachee) {
+		this.carteRattachee = carteRattachee;
+	}	
 	
 	// Méthodes métier
 
 	@Override
 	public String toString() {
-		return "Compte [numCompte=" + numCompte + ", solde=" + solde + ", dateOuverture=" + dateOuverture + ", listeCartes= " + this.listeCartes + "]";
+		return "Compte [numCompte=" + numCompte + ", solde=" + solde + ", dateOuverture=" + dateOuverture + ", carteRattachee= " + this.carteRattachee + "]";
 	}
 }

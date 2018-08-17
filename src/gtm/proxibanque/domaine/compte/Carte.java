@@ -4,7 +4,7 @@ public class Carte {
 	
 	// Attributs
 	
-	private int numCarte;
+	private String numCarte;
 	private int crypto;
 	private String nomClient;
 	private String prenomClient;
@@ -12,7 +12,7 @@ public class Carte {
 		
 	// Constructeurs
 	
-	public Carte(int numCarte, int crypto, String nomClient, String prenomClient, TypeCarte typeCarte) {
+	public Carte(String numCarte, int crypto, String nomClient, String prenomClient, TypeCarte typeCarte) {
 		super();
 		this.numCarte = numCarte;
 		this.crypto = crypto;
@@ -23,11 +23,11 @@ public class Carte {
 	
 	// Accesseurs et mutateurs
 
-	public int getNumCarte() {
+	public String getNumCarte() {
 		return numCarte;
 	}
 
-	public void setNumCarte(int numCarte) {
+	public void setNumCarte(String numCarte) {
 		this.numCarte = numCarte;
 	}
 

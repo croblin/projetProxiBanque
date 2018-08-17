@@ -1,5 +1,11 @@
 package gtm.proxibanque.domaine.personne;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import gtm.proxibanque.domaine.compte.CompteCourant;
+import gtm.proxibanque.domaine.compte.CompteEpargne;
+
 public class Client {
 	
 	// Attribtus
@@ -14,6 +20,9 @@ public class Client {
 	private String ville;
 	private String telephone;
 	private TypeClient typeClient;
+	private CompteCourant compteCourant;
+	private CompteEpargne compteEpargne;
+	private Conseiller conseillerRattache;
 	
 	// Constructeurs
 	
@@ -30,7 +39,8 @@ public class Client {
 		this.ville = ville;
 		this.telephone = telephone;
 		this.typeClient = typeClient;
-	}
+		this.compteCourant = new CompteCourant("1224" + id, 0.0f, LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+	}	
 	
 	// Accesseurs et mutateurs
 
@@ -112,6 +122,30 @@ public class Client {
 
 	public void setTypeClient(TypeClient typeClient) {
 		this.typeClient = typeClient;
+	}
+	
+	public CompteCourant getCompteCourant() {
+		return compteCourant;
+	}
+
+	public void setCompteCourant(CompteCourant compteCourant) {
+		this.compteCourant = compteCourant;
+	}
+
+	public CompteEpargne getCompteEpargne() {
+		return compteEpargne;
+	}
+
+	public void setCompteEpargne(CompteEpargne compteEpargne) {
+		this.compteEpargne = compteEpargne;
+	}
+	
+	public Conseiller getConseillerRattache() {
+		return conseillerRattache;
+	}
+
+	public void setConseillerRattache(Conseiller conseillerRattache) {
+		this.conseillerRattache = conseillerRattache;
 	}
 
 	@Override

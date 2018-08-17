@@ -8,7 +8,7 @@ public class CompteEpargne extends Compte implements IOperationCompte {
 	
 	// Constructeurs
 	
-	public CompteEpargne(int numCompte, float solde, String dateOuverture) {
+	public CompteEpargne(String numCompte, float solde, String dateOuverture) {
 		super(numCompte, solde, dateOuverture);
 	}
 	
@@ -33,14 +33,14 @@ public class CompteEpargne extends Compte implements IOperationCompte {
 	public boolean debiter(float valeur) {
 		float soldeApresDebit = this.getSolde() - valeur;
 		if(soldeApresDebit < 0.0f) {
-			System.out.println("Vous ne pouvez pas débiter de votre compte épargne le montant demandé qui est de " + valeur + "€. ");
-			System.out.println("Vous n'avez pas le droit d'être à découvert.");
+			System.out.println("Vous ne pouvez pas débiter de ce compte épargne le montant demandé qui est de " + valeur + "€. ");
+			System.out.println("Ce compte n'a pas le droit d'être à découvert.");
 			return false;
 		}
 		else {
 			this.setSolde(this.getSolde() - valeur);
-			System.out.println("Vous venez de débiter de votre compte courant la valeur demandé qui était de " + valeur + "€.");
-			System.out.println("Votre nouveau solde de votre compte épargne est maintenant de " + this.getSolde() + "€.");
+			System.out.println("Vous venez de débiter de ce compte épargne la valeur demandé qui était de " + valeur + "€.");
+			System.out.println("Le nouveau solde de ce compte épargne est maintenant de " + this.getSolde() + "€.");
 			return true;
 		}		
 	}
@@ -48,7 +48,7 @@ public class CompteEpargne extends Compte implements IOperationCompte {
 	@Override
 	public void crediter(float valeur) {
 		this.setSolde(this.getSolde() + valeur);
-		System.out.println("Le nouveau solde de votre compte épargne après créditation est maintenant de " + this.getSolde() + "€.");		
+		System.out.println("Le nouveau solde de ce compte épargne après créditation est maintenant de " + this.getSolde() + "€.");		
 	}
 
 }

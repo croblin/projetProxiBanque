@@ -8,7 +8,7 @@ public class CompteCourant extends Compte implements IOperationCompte {
 	
 	// Constructeurs
 	
-	public CompteCourant(int numCompte, float solde, String dateOuverture) {
+	public CompteCourant(String numCompte, float solde, String dateOuverture) {
 		super(numCompte, solde, dateOuverture);
 	}
 	
@@ -32,15 +32,15 @@ public class CompteCourant extends Compte implements IOperationCompte {
 	@Override
 	public boolean debiter(float valeur) {
 		float soldeApresDebit = this.getSolde() - valeur;
-		if(soldeApresDebit < - 1000.0f) {
-			System.out.println("Vous ne pouvez pas débiter de votre compte courant le montant demandé qui est de " + valeur + "€. ");
-			System.out.println("Vous allez dépasser votre autorisation de découvert.");
+		if(soldeApresDebit < - CompteCourant.autorisationDecouvert) {
+			System.out.println("Vous ne pouvez pas débiter de ce compte courant le montant demandé qui est de " + valeur + "€. ");
+			System.out.println("Vous allez dépasser l'autorisation de découvert.");
 			return false;
 		}
 		else {
 			this.setSolde(this.getSolde() - valeur);
-			System.out.println("Vous venez de débiter de votre compte courant la valeur demandé qui était de " + valeur + "€.");
-			System.out.println("Votre nouveau solde de votre compte courant est maintenant de " + this.getSolde() + "€.");
+			System.out.println("Vous venez de débiter de ce compte courant la valeur demandé qui était de " + valeur + "€.");
+			System.out.println("Le nouveau solde de ce compte courant est maintenant de " + this.getSolde() + "€.");
 			return true;
 		}
 	}
@@ -48,6 +48,6 @@ public class CompteCourant extends Compte implements IOperationCompte {
 	@Override
 	public void crediter(float valeur) {
 		this.setSolde(this.getSolde() + valeur);
-		System.out.println("Le nouveau solde de votre compte courant après créditation est maintenant de " + this.getSolde() + "€.");
+		System.out.println("Le nouveau solde de ce compte courant après créditation est maintenant de " + this.getSolde() + "€.");
 	}
 }
